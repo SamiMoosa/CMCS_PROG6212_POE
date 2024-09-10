@@ -1,6 +1,24 @@
 ﻿@{
-    ViewData["Title"] = "Privacy Policy";
+    Layout = "_Layout";
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<h2>Submit Your Claim</h2>
+
+<form>
+    <label>First Name:</label>
+    <input type="text" class="form-control" placeholder="First Name" />
+
+    <label>Last Name:</label>
+    <input type="text" class="form-control" placeholder="Last Name" />
+
+    <label>Hours Worked:</label>
+    <input type="number" class="form-control" placeholder="Hours Worked" />
+
+    <label>Hourly Rate:</label>
+    <input type="number" class="form-control" placeholder="Hourly Rate" />
+
+    <label>Upload File:</label>
+    <input type="file" class="form-control" />
+
+    <button type="submit" class="btn">Submit Claim</button>
+</form>
