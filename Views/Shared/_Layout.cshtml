@@ -6,11 +6,51 @@
     <title>@ViewData["Title"] - CMCS_PROG6212_POE</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/CMCS_PROG6212_POE.styles.css" asp-append-version="true" />
+    <style>
+        body {
+            background-color: lightpink;
+            color: black;
+        }
+
+        header .navbar {
+            background-color: beige;
+            color: black;
+        }
+
+        .navbar-brand, .nav-link {
+            color: black !important;
+        }
+
+            .navbar-brand:hover, .nav-link:hover {
+                color: lightpink !important;
+            }
+
+        .btn {
+            background-color: black;
+            color: white;
+            border: none;
+        }
+
+            .btn:hover {
+                background-color: beige;
+                color: black;
+            }
+
+        .form-control {
+            background-color: beige;
+            color: black;
+        }
+
+        .footer {
+            background-color: beige;
+            color: black;
+            padding: 10px 0;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">CMCS_PROG6212_POE</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -20,10 +60,10 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                     </ul>
                 </div>
@@ -36,11 +76,12 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="footer text-muted border-top">
         <div class="container">
             &copy; 2024 - CMCS_PROG6212_POE - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
