@@ -23,6 +23,27 @@ namespace CMCS_PROG6212_POE.Controllers
             return View();
         }
 
+        public IActionResult TrackClaims()
+        {
+            return View();
+        }
+
+        public IActionResult SignUp()
+        {
+            return View();
+        }
+
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        public IActionResult VerifyClaim()
+        {
+            return View();
+        }
+
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
