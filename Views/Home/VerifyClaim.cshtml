@@ -1,5 +1,25 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    Layout = "_Layout";
 }
+
+<h2>Verify Claim</h2>
+
+<form>
+    <label>Claim ID:</label>
+    <input type="text" class="form-control" value="C12345" disabled />
+
+    <label>Lecturer Name:</label>
+    <input type="text" class="form-control" value="John Doe" disabled />
+
+    <label>Status:</label>
+    <input type="text" class="form-control" value="Pending" disabled />
+
+    <label>Amount:</label>
+    <input type="number" class="form-control" value="5000" disabled />
+
+    <label>Uploaded Documents:</label>
+    <input type="file" class="form-control" disabled />
+
+    <button class="btn btn-success">Approve</button>
+    <button class="btn btn-danger">Deny</button>
+</form>
