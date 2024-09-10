@@ -1,5 +1,6 @@
 namespace CMCS_PROG6212_POE
 {
+    //Reference List: https://chatgpt.com, https://www.youtube.com/watch?v=YsXB-gIsi6M
     public class Program
     {
         public static void Main(string[] args)
