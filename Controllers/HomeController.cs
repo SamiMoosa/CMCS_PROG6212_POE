@@ -88,6 +88,15 @@ namespace CMCS_PROG6212_POE.Controllers
                 ModelState.AddModelError("FileName", "File must be uploaded.");
             }
 
+            // Log ModelState errors (use this for debugging)
+            if (!ModelState.IsValid)
+            {
+                foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    Console.WriteLine(error.ErrorMessage);  // This will help you identify why ModelState might be invalid
+                }
+            }
+
             if (ModelState.IsValid)
             {
                 // File upload handling
@@ -120,6 +129,7 @@ namespace CMCS_PROG6212_POE.Controllers
             // If ModelState is invalid, return the form with validation errors
             return View(claim);
         }
+
 
 
 
