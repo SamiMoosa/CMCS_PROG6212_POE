@@ -82,54 +82,73 @@ namespace CMCS_PROG6212_POE.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Privacy(ClaimModel claim, IFormFile file)
         {
-            // Check if a file has been uploaded
-            if (file == null || file.Length == 0)
-            {
-                ModelState.AddModelError("FileName", "File must be uploaded.");
-            }
-
-            // Log ModelState errors (use this for debugging)
+            // Log ModelState validation check
             if (!ModelState.IsValid)
             {
                 foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
                 {
-                    Console.WriteLine(error.ErrorMessage);  // This will help you identify why ModelState might be invalid
+                    Console.WriteLine("ModelState Error: " + error.ErrorMessage);
                 }
+                return View(claim);
             }
 
-            if (ModelState.IsValid)
+            // Handle file upload
+            if (file != null && file.Length > 0)
             {
-                // File upload handling
-                if (file != null && file.Length > 0)
+                // Define the directory path
+                var uploadsDir = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads");
+
+                // Create the directory if it does not exist
+                if (!Directory.Exists(uploadsDir))
                 {
-                    var uploadsDir = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads");
-                    Directory.CreateDirectory(uploadsDir); // Ensure directory exists
-
-                    var filePath = Path.Combine(uploadsDir, file.FileName);
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await file.CopyToAsync(stream);
-                    }
-
-                    // Set the filename in the model (important)
-                    claim.FileName = file.FileName;
+                    Directory.CreateDirectory(uploadsDir);
                 }
 
-                // Set default status
+                // Store the uploaded file
+                var filePath = Path.Combine(uploadsDir, file.FileName);
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+
+                // Set the file name on the claim object
+                claim.FileName = file.FileName;
+            }
+            else
+            {
+                ModelState.AddModelError("FileName", "File must be uploaded.");
+                return View(claim);  // Return the view if no file is uploaded
+            }
+
+            try
+            {
+                // Set the default status to Pending
                 claim.Status = "Pending";
 
-                // Add claim to the database
+                // Add the claim to the database context
+                Console.WriteLine($"Adding claim for: {claim.FirstName} {claim.LastName}, Hours Worked: {claim.HoursWorked}");
                 _context.Claims.Add(claim);
-                await _context.SaveChangesAsync(); // Save changes to the database
 
+                // Save the changes asynchronously to the database
+                await _context.SaveChangesAsync();
+                Console.WriteLine("Claim successfully saved to the database.");
+
+                // Provide feedback to the user that the claim was successfully submitted
                 TempData["Message"] = "Claim submitted successfully.";
+
+                // Redirect to TrackClaims action after submission
                 return RedirectToAction(nameof(TrackClaims), new { firstName = claim.FirstName, lastName = claim.LastName });
             }
+            catch (Exception ex)
+            {
+                // Log the exception to help with debugging
+                Console.WriteLine("Error while saving claim: " + ex.Message);
 
-            // If ModelState is invalid, return the form with validation errors
-            return View(claim);
+                // Add a model error and return the view to display the error
+                ModelState.AddModelError("", "There was an error submitting your claim. Please try again.");
+                return View(claim);
+            }
         }
-
 
 
 

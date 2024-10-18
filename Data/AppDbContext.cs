@@ -9,14 +9,15 @@ namespace CMCS_PROG6212_POE.Data
         {
         }
 
-        public DbSet<ClaimModel> Claims { get; set; }
+        public DbSet<ClaimModel> Claims { get; set; } // Ensure this is here
         public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Ensure ClaimModel's HourlyRate has precision
             modelBuilder.Entity<ClaimModel>()
                 .Property(c => c.HourlyRate)
-                .HasPrecision(18, 2);  // Set precision for decimal values
+                .HasPrecision(18, 2);
 
             base.OnModelCreating(modelBuilder);
         }
