@@ -102,7 +102,8 @@ namespace CMCS_PROG6212_POE.Controllers
                         await file.CopyToAsync(stream);
                     }
 
-                    claim.FileName = file.FileName; // Assign file name to claim
+                    // Set the filename in the model (important)
+                    claim.FileName = file.FileName;
                 }
 
                 // Set default status
@@ -119,7 +120,6 @@ namespace CMCS_PROG6212_POE.Controllers
             // If ModelState is invalid, return the form with validation errors
             return View(claim);
         }
-
 
 
 
