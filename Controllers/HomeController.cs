@@ -82,6 +82,12 @@ namespace CMCS_PROG6212_POE.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Privacy(ClaimModel claim, IFormFile file)
         {
+            // Check if a file has been uploaded
+            if (file == null || file.Length == 0)
+            {
+                ModelState.AddModelError("FileName", "File must be uploaded.");
+            }
+
             if (ModelState.IsValid)
             {
                 // File upload handling
@@ -113,6 +119,7 @@ namespace CMCS_PROG6212_POE.Controllers
             // If ModelState is invalid, return the form with validation errors
             return View(claim);
         }
+
 
 
 
