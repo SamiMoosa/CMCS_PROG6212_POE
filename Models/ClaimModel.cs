@@ -3,7 +3,7 @@ namespace CMCS_PROG6212_POE.Models  // Add this namespace declaration
 {
     public class ClaimModel
     {
-        [Key]  // Primary Key
+        [Key]
         public int ClaimId { get; set; }
 
         public string FirstName { get; set; }
@@ -14,10 +14,9 @@ namespace CMCS_PROG6212_POE.Models  // Add this namespace declaration
 
         public string Status { get; set; } = "Pending"; // Default status
 
-        // Don't mark this as required
-        public string FileName { get; set; }  // FileName will be set after the file is uploaded
+        // FileName should NOT be required
+        public string FileName { get; set; }
 
-        // New properties
         public string LecturerName => $"{FirstName} {LastName}";
         public decimal Amount => HoursWorked * HourlyRate;
     }
