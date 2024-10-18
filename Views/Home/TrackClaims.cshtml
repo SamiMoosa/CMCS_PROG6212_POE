@@ -1,27 +1,60 @@
-﻿@{
+﻿@model IEnumerable<CMCS_PROG6212_POE.Models.ClaimModel>
+
+@{
     Layout = "_Layout";
 }
 
-<h2>Track Your Claims</h2>
+<h2>Track Claims</h2>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Claim ID</th>
-            <th>Status</th>
-            <th>Amount</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>C12345</td>
-            <td>Pending</td>
-            <td>5000</td>
-        </tr>
-        <tr>
-            <td>C54321</td>
-            <td>Accepted</td>
-            <td>2000</td>
-        </tr>
-    </tbody>
-</table>
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-info">
+        @ViewBag.Message
+    </div>
+}
+
+<!-- Form to allow the lecturer to enter their name and track claims -->
+<form asp-action="TrackClaims" method="get">
+    <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input type="text" name="firstName" class="form-control" placeholder="Enter your first name" required />
+    </div>
+    <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input type="text" name="lastName" class="form-control" placeholder="Enter your last name" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Track Claims</button>
+</form>
+
+@if (Model.Any())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Claim ID</th>
+                <th>Hours Worked</th>
+                <th>Hourly Rate</th>
+                <th>Total Amount</th>
+                <th>Status</th>
+                <th>File Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var claim in Model)
+            {
+                <tr>
+                    <td>@claim.ClaimId</td>
+                    <td>@claim.HoursWorked</td>
+                    <td>@claim.HourlyRate.ToString("C")</td>
+                    <td>@claim.Amount.ToString("C")</td>
+                    <td>@claim.Status</td>
+                    <td>@claim.FileName</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No claims found for the entered name.</p>
+}

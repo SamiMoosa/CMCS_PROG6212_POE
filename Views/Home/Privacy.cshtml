@@ -1,24 +1,48 @@
-﻿@{
+﻿@model CMCS_PROG6212_POE.Models.ClaimModel
+
+@{
     Layout = "_Layout";
 }
 
 <h2>Submit Your Claim</h2>
 
-<form>
-    <label>First Name:</label>
-    <input type="text" class="form-control" placeholder="First Name" />
+<form asp-action="Privacy" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-    <label>Last Name:</label>
-    <input type="text" class="form-control" placeholder="Last Name" />
+    <div class="form-group">
+        <label asp-for="FirstName">First Name:</label>
+        <input asp-for="FirstName" class="form-control" />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
 
-    <label>Hours Worked:</label>
-    <input type="number" class="form-control" placeholder="Hours Worked" />
+    <div class="form-group">
+        <label asp-for="LastName">Last Name:</label>
+        <input asp-for="LastName" class="form-control" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
 
-    <label>Hourly Rate:</label>
-    <input type="number" class="form-control" placeholder="Hourly Rate" />
+    <div class="form-group">
+        <label asp-for="HoursWorked">Hours Worked:</label>
+        <input asp-for="HoursWorked" class="form-control" />
+        <span asp-validation-for="HoursWorked" class="text-danger"></span>
+    </div>
 
-    <label>Upload File:</label>
-    <input type="file" class="form-control" />
+    <div class="form-group">
+        <label asp-for="HourlyRate">Hourly Rate:</label>
+        <input asp-for="HourlyRate" class="form-control" />
+        <span asp-validation-for="HourlyRate" class="text-danger"></span>
+    </div>
 
-    <button type="submit" class="btn">Submit Claim</button>
+    <div class="form-group">
+        <label>Upload File:</label>
+        <input type="file" name="file" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit Claim</button>
 </form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
