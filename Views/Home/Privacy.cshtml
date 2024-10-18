@@ -6,6 +6,15 @@
 
 <h2>Submit Your Claim</h2>
 
+<!-- Display a success message if the claim is successfully submitted -->
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Message"]
+    </div>
+}
+
+<!-- Form for submitting the claim -->
 <form asp-action="Privacy" method="post" enctype="multipart/form-data">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
@@ -36,13 +45,12 @@
     <div class="form-group">
         <label>Upload File:</label>
         <input type="file" name="file" class="form-control" />
+        <span asp-validation-for="FileName" class="text-danger"></span>
     </div>
 
     <button type="submit" class="btn btn-primary">Submit Claim</button>
 </form>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    <partial name="_ValidationScriptsPartial" />
 }
